@@ -1,0 +1,20 @@
+# Personal task exports and backup folders
+/backups/
+*-backup-*.json
+
+# Local screenshots
+/screenshots/
+/Snipaste_*.png
+
+# Local configuration and editor / OS files
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.log
+*.tmp
+*~

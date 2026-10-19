@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>日日·ToDo</title>
+<link rel="stylesheet" href="assets/todo.css">
+<script defer src="assets/task-model.js">
+</script>
+<script defer src="assets/task-storage.js">
+</script>
+<script defer src="assets/todo-app.js">
+</script>
+</head>
+<body>
+<main id="appMain">
+<header>
+<div>
+<small>DAILY SPACE / 每日记录</small>
+<h1>日日·ToDo</h1>
+<p>留一点空间给计划，也给每一件完成的小事。</p>
+</div>
+<div class="header-controls">
+<span id="todayDisplay">
+</span>
+<button id="debugToggle" type="button">调试日期</button>
+</div>
+</header>
+<section id="debugPanel" class="debug-panel" hidden>
+<label for="debugDate">设置“今天”</label>
+<input id="debugDate" type="date">
+<button id="debugApply" type="button" class="primary">应用日期</button>
+<button id="debugReset" type="button">恢复真实日期</button>
+<p>临时影响新增、完成、搁置、逾期及月份分组；刷新后恢复真实日期。</p>
+</section>
+<div id="debugActive" class="debug-active" hidden>当前处于调试日期模式</div>
+<div id="delayNotice" class="delay-notice" role="status" aria-live="polite" hidden>
+<span id="delayMessage">
+</span>
+<button id="dismissDelay" type="button" aria-label="关闭延期提示">知道了</button>
+</div>
+<section id="actionPanel" class="action-panel" aria-label="操作确认" hidden>
+<p id="actionMessage">
+</p>
+<div>
+<button type="button" id="actionAccept" class="primary">确认</button>
+<button type="button" id="actionAlternative" hidden>仅搁置父任务</button>
+<button type="button" id="actionCancel">取消</button>
+</div>
+</section>
+<div id="errorBanner" class="error-banner" role="status" aria-live="polite" hidden>
+</div>
+<section class="composer" aria-label="添加待办">
+<div class="composer-heading">
+<span>新增事项</span>
+</div>
+<form class="entry" id="todoForm">
+<div class="draft-root tree-node">
+<div class="composer-task-line">
+<button id="newSubtaskButton" class="task-add" type="button" title="添加子任务" aria-label="为新事项添加子任务">+ 子任务</button>
+<input id="todoInput" aria-label="新待办" placeholder="写下一件要做的事，按 Enter 添加…" maxlength="2000" required>
+<div class="ddl-entry">
+<select id="deadlineMode" aria-label="期限类型">
+<option value="date">指定 DDL</option>
+<option value="long">长期</option>
+</select>
+<input type="date" id="ddl" aria-label="截止日期" required>
+</div>
+<button class="primary">添加 Todo</button>
+</div>
+<div id="newSubtasks" class="draft-area tree-children">
+</div>
+</div>
+</form>
+<p class="subtask-hint">点击“+ 子任务”拆分事项，子任务统一继承父任务截止日期。</p>
+</section>
+<div class="log-heading">
+<div class="feed-title">DAILY LOG / 今日待办 · 历史搁置与完成</div>
+<select id="history" aria-label="查看历史">
+<option value="">查看历史</option>
+</select>
+</div>
+<div id="records">
+</div>
+<div id="undoBar" class="undo-bar" role="status" aria-live="polite" hidden>
+<div id="undoList" class="undo-list">
+</div>
+</div>
+<footer>
+<button id="export">导出备份</button>
+<button id="import">导入备份</button>
+<input type="file" id="file" accept="application/json,.json" hidden>
+<span id="status" role="status" aria-live="polite">
+</span>
+</footer>
+<p class="note">数据自动保存在本机浏览器 · 建议定期导出备份</p>
+</main>
+<div id="deleteOverlay" class="delete-overlay" hidden>
+<section id="deleteDialog" class="delete-dialog" role="dialog" aria-modal="true" aria-labelledby="deleteTitle" aria-describedby="deleteDescription">
+<div class="delete-icon" aria-hidden="true">×</div>
+<h2 id="deleteTitle">删除这条任务？</h2>
+<div id="deleteTaskName" class="delete-task-name">
+</div>
+<p id="deleteDescription">
+</p>
+<div class="delete-buttons">
+<button id="deleteCancel" type="button">取消</button>
+<button id="deleteAccept" type="button" class="danger">确认删除</button>
+</div>
+</section>
+</div>
+</body>
+</html>
